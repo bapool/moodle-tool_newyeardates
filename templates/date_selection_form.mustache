@@ -1,0 +1,59 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template tool_newyeardates/date_selection_form
+
+    Date selection form template.
+
+    Context variables required for this template:
+    * courseid - Course ID
+    * currentstartdate - Current course start date (formatted)
+    * defaultnewdate - Default new date value (Y-m-d format)
+    * sesskey - Session key
+
+    Example context (json):
+    {
+        "courseid": 123,
+        "currentstartdate": "Monday, 1 September 2025",
+        "defaultnewdate": "2025-09-01",
+        "sesskey": "abcdef123456"
+    }
+}}
+
+<div class="tool-newyeardates-form">
+    <p>{{#str}}currentstartdate, tool_newyeardates{{/str}}: <strong>{{currentstartdate}}</strong></p>
+
+    <form method="post" action="">
+        <div class="form-group" style="max-width: 300px;">
+            <label for="newstartdate">{{#str}}newstartdate, tool_newyeardates{{/str}}:</label>
+            <input type="date" 
+                   id="newstartdate"
+                   name="newstartdate" 
+                   value="{{defaultnewdate}}" 
+                   class="form-control"
+                   style="max-width: 250px;"
+                   required="required">
+        </div>
+        
+        <input type="hidden" name="id" value="{{courseid}}">
+        <input type="hidden" name="sesskey" value="{{sesskey}}">
+        
+        <button type="submit" class="btn btn-primary">
+            {{#str}}setactivitydates, tool_newyeardates{{/str}}
+        </button>
+    </form>
+</div>
